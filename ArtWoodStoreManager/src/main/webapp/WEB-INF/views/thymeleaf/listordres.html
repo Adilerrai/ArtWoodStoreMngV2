@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <title>List Orders</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>List Orders</h2>
+
+  <!-- Add Order Button -->
+  <a th:href="@{/orders/add}" class="btn btn-primary mb-3">Add Order</a>
+
+  <!-- Order List Table -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Client</th>
+      <th>Products</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over orders and populate the table -->
+    <tr th:each="order : ${orders}">
+      <td th:text="${order.id}"></td>
+      <td th:text="${order.client.name}"></td>
+      <td>
+        <!-- Iterate over order products and display their names -->
+        <span th:each="product : ${order.products}" th:text="${product.name} + ' '"></span>
+      </td>
+      <td th:text="${order.status}"></td>
+      <td>
+        <!-- Edit Order Button -->
+        <a th:href="@{/orders/edit/{orderId}(orderId=${order.id})}" class="btn btn-warning btn-sm">Edit</a>
+
+        <!-- Delete Order Button (Confirmation dialog could be added here) -->
+        <a th:href="@{/orders/delete/{orderId}(orderId=${order.id})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <title>Client List</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>Client List</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clients}">
+      <td th:text="${client.idClient}"></td>
+      <td th:text="${client.name}"></td>
+      <td th:text="${client.email}"></td>
+      <td th:text="${client.phoneNumber}"></td>
+      <td>
+        <a th:href="@{/client/updatepage(id=${client.idClient})}" class="btn btn-warning btn-sm">Edit</a>
+        <a th:href="@{/client/delete(id=${client.idClient})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/client/add}" class="btn btn-primary">Add Client</a>
+</div>
+
+</body>
+</html>
